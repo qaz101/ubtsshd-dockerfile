@@ -15,5 +15,9 @@ RUN apt-get clean && \
 
 EXPOSE 22
 RUN sed -ri 's/^#?PasswordAuthentication\s+.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+RUN apt-get update && \
+apt install -y python-pip && \
+pip install shadowsocks && \
+apt install -y libsodium23 
 COPY ./docker-entrypoint.sh /root/docker-entrypoint.sh
 ENTRYPOINT ["/root/docker-entrypoint.sh"]
